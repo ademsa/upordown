@@ -6,10 +6,18 @@ clean:
 prepare-dependencies:
 	go mod download
 
-build-code:
-	go build -o ./bin/upordown ./cmd/main.go
+build-cli-code:
+	go build -o ./bin/upordown-cli ./cmd/cli/main.go
 
-build: clean prepare-dependencies build-code
+run-cli-code:
+	./bin/upordown-cli
+
+build-and-run-cli: build run-cli-code
+
+build-code:
+	go build -o ./bin/upordown ./cmd/web/main.go
+
+build: clean prepare-dependencies build-code build-cli-code
 
 run-code:
 	./bin/upordown
